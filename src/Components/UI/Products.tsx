@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Product from "../Product";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Box, Center, Input } from "@chakra-ui/react";
 
 const Products: React.FC = () => {
-  /** test data */
+  const [userQuery, setQuery] = useState<string>("");
+
+  const handleChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setQuery(e.target.value);
+  };
+  /** test data delete this after and use json */
   const testProducts = [
     {
       id: 1,
@@ -33,7 +40,23 @@ const Products: React.FC = () => {
 
   return (
     <>
-      <Flex justify="center" m="6em" gap="10%">
+      <Center mt="2rem" m="2rem">
+        <Input
+          value={userQuery}
+          onChange={handleChange}
+          placeholder="Search by name"
+          size="lg"
+          htmlSize={40}
+          border="solid #000000"
+        />
+        <Input
+          type="number"
+          placeholder="Search by price"
+          border="solid #000000"
+        />
+      </Center>
+
+      <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
         {testProducts.map((product) => (
           <Product
             key={product.id}

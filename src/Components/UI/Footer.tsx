@@ -8,11 +8,10 @@ import {
   VisuallyHidden,
   Flex
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import { ReactNode } from "react";
+
 
 interface Footer {
-  children: ReactNode;
+  children: React.ReactNode;
   label: string;
   href: string;
 }
@@ -58,17 +57,7 @@ export default function SmallWithSocial() {
         align={{ base: "center", md: "center" }}
       >
         <Text>© 2022 Chakra Templates. All rights reserved</Text>
-        <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
-            <FaTwitter />
-          </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
-            <FaYoutube />
-          </SocialButton>
-          <SocialButton label={"Instagram"} href={"#"}>
-            <FaInstagram />
-          </SocialButton>
-        </Stack>
+       
       </Container>
     </Box>
     </Flex>
