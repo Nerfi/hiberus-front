@@ -5,20 +5,19 @@ import Cart from "./UI/Cart";
 import Products from "./UI/Products";
 
 interface RoutesCompProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 const RoutesComp = ({ children }: RoutesCompProps) => {
   return (
     <>
       <BrowserRouter>
-       {children}
+        {children}
         <Routes>
           <Route path="cart" element={<Cart />} />
           <Route path="/" element={<Products />} />
         </Routes>
         <ChakraProvider></ChakraProvider>
       </BrowserRouter>
-     
     </>
   );
 };
