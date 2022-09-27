@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Prueba técnica Hiberus - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Deberás desarrollar una tienda online, sin gestionar toda la lógica de pagos.
 
-## Available Scripts
+Consistirá en un listado de productos, desde el cual podremos añadir los productos al carrito de la compra.
 
-In the project directory, you can run:
+Cada uno de estos productos tendrá los siguientes atributos, "id", "name", "description", "image", "price" y "discount".
 
-### `npm start`
+En el listado de productos deberás de mostrar toda la información del producto, además tendrás que tener en cuenta que alguno de los productos tiene un descuento, que tendremos que aplicar al precio para mostrar el precio con descuento e indicar al usuario de alguna forma que este producto esta en oferta.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Desde cada uno de los productos tendrás un botón que nos permitirá añadir el producto al carrito y tendrás que permitir al usuario acceder a este carrito para ver un resumen del pedido que va a realizar.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+En el listado de productos se permitira ordenar y filtrar los artículos por nombre y precio.
 
-### `npm test`
+## Cómo iniciar la API
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para tener disponible los datos de los productos como si de una api se tratará usaremos el paquete de npm json-server [Ver enlace](https://www.npmjs.com/package/json-server) el cual usando el comando `json-server --watch products.json` nos permitirá iniciar un servidor con el json proporcionado junto a este archivo.
 
-### `npm run build`
+## A tener en cuenta
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Queda a tu elección el uso de cualquier librería o herramienta que mejore la calidad del desarrollo o la fluidez a la hora de trabajar.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Se permite modificar el campo "image" de cada producto para poder guardar las imagenes en el directorio deseado, las imagenes están en la carpeta assets junto a este documento.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Las herramientas usadas para la maquetación de la aplicación tambien quedan a tu elección, el diseño de la aplicación deberá ser responsive.
 
-### `npm run eject`
+## Puntos a valorar
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Diseño usable y atractivo.
+- Estructuración del codigo y de los componentes
+- Documento indicando las decisiones tomadas a la hora de desarrollar la aplicación y por qué se han tomado.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Requisitos
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Uso de React
+- Uso de Typescript
+- Usar una librería de componentes (Ant, Chackra, etc...)
+- Uso de Redux / Context API
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Opcional:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Storybook
+- Test unitario con Jest y react testing library.
