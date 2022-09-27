@@ -1,15 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import RoutesComp from "./Components/Routes";
+import SmallWithSocial from "./Components/UI/Footer";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RoutesComp>
+      <App />
+    </RoutesComp>
+    <SmallWithSocial/>
   </React.StrictMode>
 );
 
