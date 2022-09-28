@@ -64,8 +64,8 @@ const Products: React.FC = () => {
             name={product.name}
             description={product.description}
             image={product.image}
-            price={product.price}
-            discount={product.discount}
+            price={Number(product.price)}
+            discount={Number(product.discount)}
           />
         ))}
       </Flex>

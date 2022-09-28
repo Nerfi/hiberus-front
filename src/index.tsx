@@ -2,23 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import RoutesComp from "./Components/Routes";
 import SmallWithSocial from "./Components/UI/Footer";
+import SelectedItems from "./Components/context/SelectedItems";
+import ItemsAddedContext from "./Components/context/ItemsAddedContext";
+
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RoutesComp>
-      <App />
-    </RoutesComp>
-    <SmallWithSocial/>
+    <ItemsAddedContext>
+    <SelectedItems>
+      <RoutesComp>
+        <App />
+      </RoutesComp>
+    </SelectedItems>
+    </ItemsAddedContext>
+    <SmallWithSocial />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

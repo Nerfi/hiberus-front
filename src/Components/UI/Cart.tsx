@@ -2,6 +2,8 @@ import React from "react";
 import Product from "../Product";
 import { Box, Center } from "@chakra-ui/react";
 
+
+
 const Cart: React.FC = () => {
   return (
     <>

@@ -1,15 +1,19 @@
-import React from "react";
-import { Box, Image, Badge, Button, useToast } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { Box, Image, Badge, Button, useToast, Flex } from "@chakra-ui/react";
+import { SelectItemsContext } from "../Components/context/SelectedItems";
+import { ContextType,ItemsContextInterface } from "../Components/Interfaces/ContextType";
+import {ItemsContext} from "../Components/context/ItemsAddedContext";
 
 interface Product {
   id: number;
   name: string;
   description: string;
   image: string;
-  price: string;
+  price: number;
   key: number;
-  discount?: string | null;
+  discount?: number;
 }
+
 const Product: React.FC<Product> = ({
   id,
   name,
@@ -19,6 +23,18 @@ const Product: React.FC<Product> = ({
   discount,
 }: Product) => {
   const toast = useToast();
+  const {setAddedItem} = useContext(ItemsContext) as ItemsContextInterface;
+  const { setNumberItems } = useContext(SelectItemsContext) as ContextType;
+
+  
+  const calculatePriceAfterDiscount = (
+    price: number,
+    discount: number
+  ): number => {
+    const realPrice = Number(price) - Number(discount);
+    return Number(realPrice.toFixed(2));
+  };
+
   return (
     <>
       <Box
@@ -55,21 +71,47 @@ const Product: React.FC<Product> = ({
           >
             {description}
           </Box>
-          <Box>
-            {price}
-            <Box as="span" color="gray.600" fontSize="sm">
-              / $
+          {discount ? (
+            <>
+              <Flex gap=".5rem">
+                Antes:
+                <Box textDecoration="line-through">
+                  {price}
+                  <Box as="span" color="gray.600" fontSize="sm">
+                    / $
+                  </Box>
+                </Box>
+              </Flex>
+            </>
+          ) : (
+            <Box>
+              {price}
+              <Box as="span" color="gray.600" fontSize="sm">
+                / $
+              </Box>
             </Box>
-          </Box>
-          {/* find a way to let the user know that the product has discount*/}
+          )}
 
-          <Box>
-            Discount:
-            {discount}
-            <Box as="span" color="gray.600" fontSize="sm">
-              / $
-            </Box>
-          </Box>
+          {discount && (
+            <>
+              <div
+                style={{
+                  backgroundColor: "red",
+                  minWidth: "80px",
+                  width: "80px",
+                }}
+              >
+                En Oferta
+              </div>
+              <Box>
+                Ahora: {calculatePriceAfterDiscount(price, discount)}
+                <Box as="span" color="gray.600" fontSize="sm">
+                  / $
+                </Box>
+              </Box>
+            </>
+          )}
+
           <Button
             as="button"
             borderRadius="md"
@@ -80,11 +122,13 @@ const Product: React.FC<Product> = ({
                 title: `${name}`,
                 description: "was added to your cart",
                 status: "success",
-                duration: 9000,
+                duration: 5000,
                 isClosable: true,
               });
 
-              alert(id);
+              setNumberItems((prev) => prev + 1);
+              //llamar a la funcion para añadir el item deseado
+              //setAddedItem
             }}
             p="2px"
             mt="10px"
