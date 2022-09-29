@@ -6,9 +6,8 @@ import {
   Text,
   useColorModeValue,
   VisuallyHidden,
-  Flex
+  Flex,
 } from "@chakra-ui/react";
-
 
 interface Footer {
   children: React.ReactNode;
@@ -16,52 +15,32 @@ interface Footer {
   href: string;
 }
 
-const SocialButton = ({ children, label, href }: Footer) => {
-  return (
-    <chakra.button
-      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-      rounded={"full"}
-      w={8}
-      h={8}
-      cursor={"pointer"}
-      as={"a"}
-      href={href}
-      display={"inline-flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      transition={"background 0.3s ease"}
-      _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
-      }}
-    >
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
-  );
-};
-
 export default function SmallWithSocial() {
   return (
-    <Flex justify="center">
-    <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
-    >
-      <Container
-        as={Stack}
-        maxW={"6xl"}
-        py={4}
-        direction={{ base: "column", md: "row" }}
-        spacing={4}
-        justify={{ base: "center", md: "space-between" }}
-        align={{ base: "center", md: "center" }}
+     <Box
+     border="solid yellow"
+     position="relative"
+     top="50px"
+  
+        marginTop="5rem"
+        bg={useColorModeValue("gray.50", "gray.900")}
+        color={useColorModeValue("gray.700", "gray.200")}
       >
-        <Text>© 2022 Chakra Templates. All rights reserved</Text>
-       
-      </Container>
-    </Box>
-    </Flex>
+    <Flex justify="center">
+     
+        <Container
+          as={Stack}
+          maxW={"6xl"}
+          py={4}
+          direction={{ base: "column", md: "row" }}
+          spacing={4}
+          justify={{ base: "center", md: "space-between" }}
+          align={{ base: "center", md: "center" }}
+        >
+          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+        </Container>
+        </Flex>
+      </Box>
+    
   );
 }
-
-

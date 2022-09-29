@@ -70,6 +70,7 @@ const Product: React.FC<Product> = ({
             mt="1"
             fontWeight="semibold"
             as="h4"
+            maxW="150px"
             lineHeight="tight"
             noOfLines={1}
           >

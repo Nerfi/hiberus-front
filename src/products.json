@@ -52,7 +52,7 @@
             "id": 7,
             "name": "Sneakers",
             "description": "A very comfortable sneakers",
-            "image": "./sneakers.jpg",
+            "image": "../assets/sneakers.jpg",
             "price": "70.90",
             "discount": null
         },
@@ -69,6 +69,7 @@
             "name": "Sunglasses",
             "description": "Sunglasses to protect your eyes against the sun",
             "image": "./sunglasses.jpg",
+            
             "price": "30.00",
             "discount": "2"
         },

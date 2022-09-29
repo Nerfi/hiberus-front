@@ -6,9 +6,11 @@ import { ItemsContextInterface } from "../Interfaces/ContextType";
 
 const Cart: React.FC = () => {
   const { addItem } = useContext(ItemsContext) as ItemsContextInterface;
+  console.log(addItem, "ad item ");
+
   return (
     <>
-      <Box border="solid 2px red" h="90vh">
+      <Box h="90vh">
         <Center bg="transparent" h="90vh" color="black">
           <Flex
             justify="center"
@@ -18,9 +20,11 @@ const Cart: React.FC = () => {
             wrap="wrap"
             h="60vh"
           >
-            {addItem.map((product) => (
-              <Product key={product.id} {...product} component="cart" />
-            ))}
+            {!addItem.length
+              ? "Add somethign to your shopping cart"
+              : addItem.map((product) => (
+                  <Product key={product.id} {...product} component="cart" />
+                ))}
           </Flex>
         </Center>
       </Box>

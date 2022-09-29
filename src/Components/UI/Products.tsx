@@ -1,43 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Product from "../Product";
-import { Flex, Box, Center, Input } from "@chakra-ui/react";
+import axios, { AxiosResponse } from "axios";
+import { Flex, Center, Input } from "@chakra-ui/react";
+import { Items } from "../Interfaces/ContextType";
 
 const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
+  const [products, setProducts] = useState<Items[]>([]);
+
+  useEffect(() => {
+    const handleRequest = async () => {
+      try {
+        const products: AxiosResponse<Items[]> = await axios({
+          method: "GET",
+          url: "http://localhost:3001/products",
+          responseType: "stream",
+        });
+
+        setProducts(products.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    handleRequest();
+  }, []);
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setQuery(e.target.value);
   };
-  /** test data delete this after and use json */
-  const testProducts = [
-    {
-      id: 1,
-      name: "Bag",
-      description: "A beutiful bag",
-      image: "./bag.jpg",
-      price: "10.89",
-      discount: "10",
-    },
-    {
-      id: 2,
-      name: "Bottle",
-      description: "A useful bottle to drink you favourite drink",
-      image: "./bottle.jpg",
-      price: "20.10",
-      discount: "20",
-    },
-    {
-      id: 3,
-      name: "Cake",
-      description: "A delicious yellow cake",
-      image: "./cake.jpg",
-      price: "30.00",
-      discount: null,
-    },
-  ];
 
+  useEffect(() => {
+    const filterByUserQuery = async (query: string) => {
+      try {
+        const retrieveData = await axios({
+          method: "GET",
+          url: `http://localhost:3001/products?q=${query}`,
+          responseType: "stream",
+        });
+
+        console.log(retrieveData, "data retrieve");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    filterByUserQuery(userQuery);
+  }, [userQuery]);
   return (
     <>
       <Center mt="2rem" m="2rem">
@@ -57,9 +68,9 @@ const Products: React.FC = () => {
       </Center>
 
       <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
-        {testProducts.map((product) => (
+        {products.map((product) => (
           <Product
-          component="products"
+            component="products"
             key={product.id}
             id={product.id}
             name={product.name}
