@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { Box, Image, Badge, Button, useToast, Flex } from "@chakra-ui/react";
 import { SelectItemsContext } from "../Components/context/SelectedItems";
-import { ContextType,ItemsContextInterface } from "../Components/Interfaces/ContextType";
-import {ItemsContext} from "../Components/context/ItemsAddedContext";
+import {
+  ContextType,
+  ItemsContextInterface,
+} from "../Components/Interfaces/ContextType";
+import { ItemsContext } from "../Components/context/ItemsAddedContext";
 
 interface Product {
   id: number;
@@ -12,6 +15,7 @@ interface Product {
   price: number;
   key: number;
   discount?: number;
+  component: string;
 }
 
 const Product: React.FC<Product> = ({
@@ -21,12 +25,12 @@ const Product: React.FC<Product> = ({
   image,
   price,
   discount,
+  component,
 }: Product) => {
   const toast = useToast();
-  const {setAddedItem} = useContext(ItemsContext) as ItemsContextInterface;
+  const { setAddedItem } = useContext(ItemsContext) as ItemsContextInterface;
   const { setNumberItems } = useContext(SelectItemsContext) as ContextType;
 
-  
   const calculatePriceAfterDiscount = (
     price: number,
     discount: number
@@ -112,29 +116,33 @@ const Product: React.FC<Product> = ({
             </>
           )}
 
-          <Button
-            as="button"
-            borderRadius="md"
-            bg="blue"
-            color="white"
-            onClick={() => {
-              toast({
-                title: `${name}`,
-                description: "was added to your cart",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-              });
+          {component !== "cart" ? (
+            <Button
+              as="button"
+              borderRadius="md"
+              bg="blue"
+              color="white"
+              onClick={() => {
+                toast({
+                  title: `${name}`,
+                  description: "was added to your cart",
+                  status: "success",
+                  duration: 5000,
+                  isClosable: true,
+                });
 
-              setNumberItems((prev) => prev + 1);
-              //llamar a la funcion para añadir el item deseado
-              //setAddedItem
-            }}
-            p="2px"
-            mt="10px"
-          >
-            Add to cart
-          </Button>
+                setNumberItems((prev) => prev + 1);
+                setAddedItem((prev) => [
+                  ...prev,
+                  { id, name, price, description, image, discount },
+                ]);
+              }}
+              p="2px"
+              mt="10px"
+            >
+              Add to cart
+            </Button>
+          ) : null}
         </Box>
       </Box>
     </>

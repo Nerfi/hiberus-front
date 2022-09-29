@@ -59,6 +59,7 @@ const Products: React.FC = () => {
       <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
         {testProducts.map((product) => (
           <Product
+          component="products"
             key={product.id}
             id={product.id}
             name={product.name}
