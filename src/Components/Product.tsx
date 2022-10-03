@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Image, Badge, Button, useToast, Flex } from "@chakra-ui/react";
+import { Box, Image, Button, useToast, Flex } from "@chakra-ui/react";
 import { SelectItemsContext } from "../Components/context/SelectedItems";
 import {
   ContextType,
@@ -52,9 +52,6 @@ const Product: React.FC<Product> = ({
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">
-            <Badge borderRadius="full" px="2" colorScheme="teal">
-              New
-            </Badge>
             <Box
               color="gray.500"
               fontWeight="semibold"
@@ -97,7 +94,7 @@ const Product: React.FC<Product> = ({
             </Box>
           )}
 
-          {discount ?  (
+          {discount ? (
             <>
               <div
                 style={{
@@ -115,7 +112,7 @@ const Product: React.FC<Product> = ({
                 </Box>
               </Box>
             </>
-          ): null }
+          ) : null}
 
           {component !== "cart" ? (
             <Button
@@ -143,7 +140,7 @@ const Product: React.FC<Product> = ({
             >
               Add to cart
             </Button>
-            ) : null}
+          ) : null}
         </Box>
       </Box>
     </>

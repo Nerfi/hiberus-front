@@ -6,25 +6,7 @@ import { Items } from "../Interfaces/ContextType";
 
 const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
-  const [products, setProducts] = useState<Items[]>([]);
-
-  useEffect(() => {
-    const handleRequest = async () => {
-      try {
-        const products: AxiosResponse<Items[]> = await axios({
-          method: "GET",
-          url: "http://localhost:3001/products",
-          responseType: "stream",
-        });
-
-        setProducts(products.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    handleRequest();
-  }, []);
+  const [filteredProducts, setFilteredProducts] = useState<Items[]>([]);
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -33,15 +15,14 @@ const Products: React.FC = () => {
   };
 
   useEffect(() => {
-    const filterByUserQuery = async (query: string) => {
+    const filterByUserQuery = async (query: string): Promise<void> => {
       try {
-        const retrieveData = await axios({
+        const retrieveData: AxiosResponse<Items[]> = await axios({
           method: "GET",
           url: `http://localhost:3001/products?name_like=${query}`,
           responseType: "stream",
         });
-
-        console.log(retrieveData, "data retrieve");
+        setFilteredProducts(retrieveData.data);
       } catch (error) {
         console.log(error);
       }
@@ -68,18 +49,19 @@ const Products: React.FC = () => {
       </Center>
 
       <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
-        {products.map((product) => (
-          <Product
-            component="products"
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            description={product.description}
-            image={product.image}
-            price={Number(product.price)}
-            discount={Number(product.discount)}
-          />
-        ))}
+        {filteredProducts &&
+          filteredProducts.map((product) => (
+            <Product
+              component="products"
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              description={product.description}
+              image={product.image}
+              price={Number(product.price)}
+              discount={Number(product.discount)}
+            />
+          ))}
       </Flex>
     </>
   );
