@@ -37,7 +37,7 @@ const Products: React.FC = () => {
       try {
         const retrieveData = await axios({
           method: "GET",
-          url: `http://localhost:3001/products?q=${query}`,
+          url: `http://localhost:3001/products?name_like=${query}`,
           responseType: "stream",
         });
 
