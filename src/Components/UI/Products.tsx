@@ -8,7 +8,8 @@ const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Items[]>([]);
   const [sortByPrice, setSort] = useState<boolean>(false);
-
+  let asc: string  = "http://localhost:3001/products?_sort=price&_order=asc";
+  let desc: string = "http://localhost:3001/products?_sort=price&_order=desc";
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -38,8 +39,8 @@ const Products: React.FC = () => {
       const sortedResults = await axios({
         method: "GET",
         url: sortByPrice
-          ? "http://localhost:3001/products?_sort=price&_order=asc"
-          : "http://localhost:3001/products?_sort=price&_order=desc",
+          ? asc
+          : desc,
         responseType: "json",
       });
 
