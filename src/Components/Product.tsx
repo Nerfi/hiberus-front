@@ -97,7 +97,7 @@ const Product: React.FC<Product> = ({
             </Box>
           )}
 
-          {discount && (
+          {discount ?  (
             <>
               <div
                 style={{
@@ -115,7 +115,7 @@ const Product: React.FC<Product> = ({
                 </Box>
               </Box>
             </>
-          )}
+          ): null }
 
           {component !== "cart" ? (
             <Button
@@ -143,7 +143,7 @@ const Product: React.FC<Product> = ({
             >
               Add to cart
             </Button>
-          ) : null}
+            ) : null}
         </Box>
       </Box>
     </>
