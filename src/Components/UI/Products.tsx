@@ -21,10 +21,9 @@ const Products: React.FC = () => {
         const retrieveData: AxiosResponse<Items[]> = await axios({
           method: "GET",
           url: `http://localhost:3001/products?name_like=${query}`,
-          responseType: "stream",
+          responseType: "json",
         });
         setFilteredProducts(retrieveData.data);
-        
       } catch (error) {
         console.log(error);
       }
@@ -37,14 +36,14 @@ const Products: React.FC = () => {
     try {
       setSort((prev) => !prev);
       const sortedResults = await axios({
-        method: "GET", 
-        url: sortByPrice ? "http://localhost:3001/products?_sort=price&_order=asc" : "http://localhost:3001/products?_sort=price&_order=desc",
-        responseType: "stream"
-      })
+        method: "GET",
+        url: sortByPrice
+          ? "http://localhost:3001/products?_sort=price&_order=asc"
+          : "http://localhost:3001/products?_sort=price&_order=desc",
+        responseType: "json",
+      });
 
-      setFilteredProducts(sortedResults.data)
-
-      console.log(sortedResults.data, "resuts sorted") //working
+      setFilteredProducts(sortedResults.data);
     } catch (error) {}
   };
 
