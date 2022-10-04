@@ -7,9 +7,10 @@ import { Items } from "../Interfaces/ContextType";
 const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Items[]>([]);
+  const [products, setProducts] = useState<Items[]>([]);
   const [sortByPrice, setSort] = useState<boolean>(false);
-  let asc: string = "http://localhost:3001/products?_sort=price&_order=asc";
-  let desc: string = "http://localhost:3001/products?_sort=price&_order=desc";
+  let asc: string = "http://localhost:30001/products?_sort=price&_order=asc";
+  let desc: string = "http://localhost:30001/products?_sort=price&_order=desc";
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -17,14 +18,32 @@ const Products: React.FC = () => {
   };
 
   useEffect(() => {
+    const products = async (): Promise<void> => {
+      try {
+        const retrieveProdcuts: AxiosResponse<Items[]> = await axios({
+          method: "GET",
+          url: "http://localhost:30001/products",
+          responseType: "json",
+        });
+
+        setProducts(retrieveProdcuts.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    products();
+  }, []);
+
+  useEffect(() => {
     const filterByUserQuery = async (query: string): Promise<void> => {
       try {
         const retrieveData: AxiosResponse<Items[]> = await axios({
           method: "GET",
-          url: `http://localhost:3001/products?name_like=${query}`,
+          url: `http://localhost:30001/products?name_like=${query}`,
           responseType: "json",
         });
-        setFilteredProducts(retrieveData.data);
+        setProducts(retrieveData.data);
       } catch (error) {
         console.log(error);
       }
@@ -42,8 +61,10 @@ const Products: React.FC = () => {
         responseType: "json",
       });
 
-      setFilteredProducts(sortedResults.data);
-    } catch (error) {}
+      setProducts(sortedResults.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -69,6 +90,18 @@ const Products: React.FC = () => {
       </Center>
 
       <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
+        {products.map((product) => (
+          <Product
+            component="products"
+            key={product.id}
+            id={product.id}
+            name={product.name}
+            description={product.description}
+            image={product.image}
+            price={Number(product.price)}
+            discount={Number(product.discount)}
+          />
+        ))}
         {filteredProducts &&
           filteredProducts.map((product) => (
             <Product
