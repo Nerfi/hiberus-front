@@ -40,110 +40,113 @@ const Product: React.FC<Product> = ({
   };
 
   return (
-    <>
-      <Box
-        maxW="sm"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        border="4px"
-      >
-        <Image src={image} alt={description} />
+    <Box
+      maxW="sm"
+      overflow="hidden"
+      width="250px"
+      border="4px solid #000000"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      data-testid="jokeContainer"
+    >
+      <Image w="140px" src={image} alt={description} />
 
-        <Box p="6">
-          <Box display="flex" alignItems="baseline">
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              ml="2"
-            >
-              {name}
-            </Box>
-          </Box>
+      <Box p="6">
+        <Box>
           <Box
-            mt="1"
+            color="gray.500"
             fontWeight="semibold"
-            as="h4"
-            maxW="150px"
-            lineHeight="tight"
-            noOfLines={1}
+            letterSpacing="wide"
+            fontSize="xs"
+            textTransform="uppercase"
+            ml="2"
           >
-            {description}
+            {name}
           </Box>
-          {discount ? (
-            <>
-              <Flex gap=".5rem">
-                Antes:
-                <Box textDecoration="line-through">
-                  {price}
-                  <Box as="span" color="gray.600" fontSize="sm">
-                    / $
-                  </Box>
-                </Box>
-              </Flex>
-            </>
-          ) : (
-            <Box>
-              {price}
-              <Box as="span" color="gray.600" fontSize="sm">
-                / $
-              </Box>
-            </Box>
-          )}
-
-          {discount ? (
-            <>
-              <div
-                style={{
-                  backgroundColor: "red",
-                  minWidth: "80px",
-                  width: "80px",
-                }}
-              >
-                En Oferta
-              </div>
-              <Box>
-                Ahora: {calculatePriceAfterDiscount(price, discount)}
+        </Box>
+        <Box
+          mt="1"
+          fontWeight="semibold"
+          as="h4"
+          width="200px"
+          overflowWrap="break-word"
+          wordBreak="break-word"
+          lineHeight="tight"
+        >
+          {description}
+        </Box>
+        {discount ? (
+          <>
+            <Flex gap=".5rem">
+              Antes:
+              <Box textDecoration="line-through">
+                {price}
                 <Box as="span" color="gray.600" fontSize="sm">
                   / $
                 </Box>
               </Box>
-            </>
-          ) : null}
+            </Flex>
+          </>
+        ) : (
+          <Box>
+            {price}
+            <Box as="span" color="gray.600" fontSize="sm">
+              / $
+            </Box>
+          </Box>
+        )}
 
-          {component !== "cart" ? (
-            <Button
-              as="button"
-              borderRadius="md"
-              bg="blue"
-              color="white"
-              onClick={() => {
-                toast({
-                  title: `${name}`,
-                  description: "was added to your cart",
-                  status: "success",
-                  duration: 5000,
-                  isClosable: true,
-                });
-
-                setNumberItems((prev) => prev + 1);
-                setAddedItem((prev) => [
-                  ...prev,
-                  { id, name, price, description, image, discount },
-                ]);
+        {discount ? (
+          <>
+            <div
+              style={{
+                backgroundColor: "red",
+                minWidth: "80px",
+                width: "80px",
               }}
-              p="2px"
-              mt="10px"
             >
-              Add to cart
-            </Button>
-          ) : null}
-        </Box>
+              En Oferta
+            </div>
+            <Box>
+              Ahora: {calculatePriceAfterDiscount(price, discount)}
+              <Box as="span" color="gray.600" fontSize="sm">
+                / $
+              </Box>
+            </Box>
+          </>
+        ) : null}
+
+        {component !== "cart" ? (
+          <Button
+            as="button"
+            borderRadius="md"
+            bg="blue"
+            color="white"
+            onClick={() => {
+              toast({
+                title: `${name}`,
+                description: "was added to your cart",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+              });
+
+              setNumberItems((prev) => prev + 1);
+              setAddedItem((prev) => [
+                ...prev,
+                { id, name, price, description, image, discount },
+              ]);
+            }}
+            p="2px"
+            mt="10px"
+          >
+            Add to cart
+          </Button>
+        ) : null}
       </Box>
-    </>
+    </Box>
   );
 };
 

@@ -1,11 +1,9 @@
 import {
   Box,
-  chakra,
   Container,
   Stack,
   Text,
   useColorModeValue,
-  VisuallyHidden,
   Flex,
 } from "@chakra-ui/react";
 
@@ -17,17 +15,15 @@ interface Footer {
 
 export default function SmallWithSocial() {
   return (
-     <Box
-     border="solid yellow"
-     position="relative"
-     top="50px"
-  
-        marginTop="5rem"
-        bg={useColorModeValue("gray.50", "gray.900")}
-        color={useColorModeValue("gray.700", "gray.200")}
-      >
-    <Flex justify="center">
-     
+    <Box
+      border="solid yellow"
+      position="relative"
+      top="50px"
+      marginTop="5rem"
+      bg={useColorModeValue("gray.50", "gray.900")}
+      color={useColorModeValue("gray.700", "gray.200")}
+    >
+      <Flex justify="center">
         <Container
           as={Stack}
           maxW={"6xl"}
@@ -39,8 +35,7 @@ export default function SmallWithSocial() {
         >
           <Text>© 2022 Chakra Templates. All rights reserved</Text>
         </Container>
-        </Flex>
-      </Box>
-    
+      </Flex>
+    </Box>
   );
 }

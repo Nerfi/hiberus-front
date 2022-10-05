@@ -6,20 +6,17 @@ import RoutesComp from "./Components/Routes";
 import SmallWithSocial from "./Components/UI/Footer";
 import SelectedItems from "./Components/context/SelectedItems";
 import ItemsAddedContext from "./Components/context/ItemsAddedContext";
-
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <ItemsAddedContext>
-    <SelectedItems>
-      <RoutesComp>
-        <App />
-      </RoutesComp>
-    </SelectedItems>
+      <SelectedItems>
+        <RoutesComp>
+          <App />
+        </RoutesComp>
+      </SelectedItems>
     </ItemsAddedContext>
-    <SmallWithSocial />
   </React.StrictMode>
 );
