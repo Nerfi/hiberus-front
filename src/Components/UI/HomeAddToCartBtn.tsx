@@ -1,12 +1,9 @@
-import React , { useContext } from "react";
+import React, { useContext } from "react";
 import { Button, useToast } from "@chakra-ui/react";
 import { IProduct } from "../Product";
 import { ItemsContext } from "../context/ItemsAddedContext";
-import  {SelectItemsContext} from "../context/SelectedItems";
-import {
-  ContextType,
-  ItemsContextInterface,
-} from "../Interfaces/ContextType";
+import { SelectItemsContext } from "../context/SelectedItems";
+import { ContextType, ItemsContextInterface } from "../Interfaces/ContextType";
 
 const HomeAddToCartBtn = ({
   id,
@@ -17,7 +14,7 @@ const HomeAddToCartBtn = ({
   discount,
 }: IProduct) => {
   const toast = useToast();
-const { setAddedItem } = useContext(ItemsContext) as ItemsContextInterface;
+  const { setAddedItem } = useContext(ItemsContext) as ItemsContextInterface;
   const { setNumberItems } = useContext(SelectItemsContext) as ContextType;
   return (
     <>
