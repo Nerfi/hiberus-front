@@ -10,7 +10,7 @@ export interface IProduct {
   image: string;
   price: number;
   key: number;
-  discount?: number;
+  discount: number;
   component?: string;
 }
 
@@ -79,6 +79,7 @@ const Product: React.FC<IProduct> = ({
               description={description}
               image={image}
               key={id}
+              discount={discount}
             />
           ) : null}
         </Box>

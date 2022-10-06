@@ -13,7 +13,7 @@ export interface Items {
   description: string;
   image: string; //comprobarlo despues
   price: number;
-  discount?: number;
+  discount: number;
 }
 
 export interface ItemsContextInterface {
