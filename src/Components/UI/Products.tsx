@@ -4,27 +4,37 @@ import axios, { AxiosResponse } from "axios";
 import { Flex, Center, Input, Box } from "@chakra-ui/react";
 import { Items } from "../Interfaces/ContextType";
 
+//test util funciton
+import axiosConfig from "../../utils/axiosInstance";
+
 const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<Items[]>([]);
   const [products, setProducts] = useState<Items[]>([]);
   const [sortByPrice, setSort] = useState<boolean>(false);
-  let asc: string = "http://localhost:3001/products?_sort=price&_order=asc";
-  let desc: string = "http://localhost:3001/products?_sort=price&_order=desc";
+ const asc = process.env.REACT_APP_ASC_ORDER_ULR;
+  const desc = process.env.REACT_APP_DESC_ORDER_URL;
+  const url = process.env.REACT_APP_MAIN_URL;
+
+   let sorting = sortByPrice ? asc : desc;
+
+   console.log(sorting, "soritn ")
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setQuery(e.target.value);
   };
 
+  console.log(process.env.REACT_APP_MAIN_URL, "Juan", asc);
   useEffect(() => {
     const products = async (): Promise<void> => {
       try {
-        const retrieveProdcuts: AxiosResponse<Items[]> = await axios({
-          method: "GET",
-          url: "http://localhost:3001/products",
-          responseType: "json",
-        });
+        const retrieveProdcuts: AxiosResponse<Items[]> = await axiosConfig(
+          "GET",
+          url
+        );
+
+        console.log(retrieveProdcuts, "prop")
 
         setProducts(retrieveProdcuts.data);
       } catch (error) {
@@ -38,11 +48,10 @@ const Products: React.FC = () => {
   useEffect(() => {
     const filterByUserQuery = async (query: string): Promise<void> => {
       try {
-        const retrieveData: AxiosResponse<Items[]> = await axios({
-          method: "GET",
-          url: `http://localhost:3001/products?name_like=${query}`,
-          responseType: "json",
-        });
+        const retrieveData: AxiosResponse<Items[]> = await axiosConfig(
+          "GET",
+          `http://localhost:3001/products?name_like=${query}`
+        );
         setProducts(retrieveData.data);
       } catch (error) {
         console.log(error);
@@ -52,14 +61,13 @@ const Products: React.FC = () => {
     filterByUserQuery(userQuery);
   }, [userQuery]);
 
+
   const handleSortByPrice = async (): Promise<void> => {
     try {
       setSort((prev) => !prev);
-      const sortedResults = await axios({
-        method: "GET",
-        url: sortByPrice ? asc : desc,
-        responseType: "json",
-      });
+   
+
+      const sortedResults = await axiosConfig("GET", sorting);
 
       setProducts(sortedResults.data);
     } catch (error) {
