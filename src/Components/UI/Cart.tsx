@@ -5,10 +5,6 @@ import { ItemsContext } from "../context/ItemsAddedContext";
 import { ItemsContextInterface } from "../Interfaces/ContextType";
 import { Link } from "react-router-dom";
 
-//
-
-import Discount from "./Discount";
-
 const Cart: React.FC = () => {
   const { addItem } = useContext(ItemsContext) as ItemsContextInterface;
   const linkTo = <Link to="/">Add somethign to your shopping cart</Link>;
