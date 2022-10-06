@@ -9,8 +9,8 @@ const Products: React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState<Items[]>([]);
   const [products, setProducts] = useState<Items[]>([]);
   const [sortByPrice, setSort] = useState<boolean>(false);
-  let asc: string = "http://localhost:30001/products?_sort=price&_order=asc";
-  let desc: string = "http://localhost:30001/products?_sort=price&_order=desc";
+  let asc: string = "http://localhost:3001/products?_sort=price&_order=asc";
+  let desc: string = "http://localhost:3001/products?_sort=price&_order=desc";
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -22,7 +22,7 @@ const Products: React.FC = () => {
       try {
         const retrieveProdcuts: AxiosResponse<Items[]> = await axios({
           method: "GET",
-          url: "http://localhost:30001/products",
+          url: "http://localhost:3001/products",
           responseType: "json",
         });
 
@@ -40,7 +40,7 @@ const Products: React.FC = () => {
       try {
         const retrieveData: AxiosResponse<Items[]> = await axios({
           method: "GET",
-          url: `http://localhost:30001/products?name_like=${query}`,
+          url: `http://localhost:3001/products?name_like=${query}`,
           responseType: "json",
         });
         setProducts(retrieveData.data);
