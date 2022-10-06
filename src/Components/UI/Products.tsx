@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Product from "../Product";
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { Flex, Center, Input, Box } from "@chakra-ui/react";
 import { Items } from "../Interfaces/ContextType";
-
-//test util funciton
 import axiosConfig from "../../utils/axiosInstance";
 
 const Products: React.FC = () => {
@@ -12,20 +10,17 @@ const Products: React.FC = () => {
   const [filteredProducts, setFilteredProducts] = useState<Items[]>([]);
   const [products, setProducts] = useState<Items[]>([]);
   const [sortByPrice, setSort] = useState<boolean>(false);
- const asc = process.env.REACT_APP_ASC_ORDER_ULR;
+  const asc = process.env.REACT_APP_ASC_ORDER_ULR;
   const desc = process.env.REACT_APP_DESC_ORDER_URL;
   const url = process.env.REACT_APP_MAIN_URL;
+  let sorting = sortByPrice ? asc : desc;
 
-   let sorting = sortByPrice ? asc : desc;
-
-   console.log(sorting, "soritn ")
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setQuery(e.target.value);
   };
 
-  console.log(process.env.REACT_APP_MAIN_URL, "Juan", asc);
   useEffect(() => {
     const products = async (): Promise<void> => {
       try {
@@ -33,8 +28,6 @@ const Products: React.FC = () => {
           "GET",
           url
         );
-
-        console.log(retrieveProdcuts, "prop")
 
         setProducts(retrieveProdcuts.data);
       } catch (error) {
@@ -61,11 +54,9 @@ const Products: React.FC = () => {
     filterByUserQuery(userQuery);
   }, [userQuery]);
 
-
   const handleSortByPrice = async (): Promise<void> => {
     try {
       setSort((prev) => !prev);
-   
 
       const sortedResults = await axiosConfig("GET", sorting);
 

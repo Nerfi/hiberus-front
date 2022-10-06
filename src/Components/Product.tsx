@@ -6,6 +6,7 @@ import {
   ItemsContextInterface,
 } from "../Components/Interfaces/ContextType";
 import { ItemsContext } from "../Components/context/ItemsAddedContext";
+import Discount from "../Components/UI/Discount";
 
 interface Product {
   id: number;
@@ -30,14 +31,6 @@ const Product: React.FC<Product> = ({
   const toast = useToast();
   const { setAddedItem } = useContext(ItemsContext) as ItemsContextInterface;
   const { setNumberItems } = useContext(SelectItemsContext) as ContextType;
-
-  const calculatePriceAfterDiscount = (
-    price: number,
-    discount: number
-  ): number => {
-    const realPrice = Number(price) - Number(discount);
-    return Number(realPrice.toFixed(2));
-  };
 
   return (
     <>
@@ -73,17 +66,10 @@ const Product: React.FC<Product> = ({
           >
             {description}
           </Box>
+
           {discount ? (
             <>
-              <Flex gap=".5rem">
-                Antes:
-                <Box textDecoration="line-through">
-                  {price}
-                  <Box as="span" color="gray.600" fontSize="sm">
-                    / $
-                  </Box>
-                </Box>
-              </Flex>
+              <Discount price={price} discount={discount} />
             </>
           ) : (
             <Box>
@@ -93,26 +79,6 @@ const Product: React.FC<Product> = ({
               </Box>
             </Box>
           )}
-
-          {discount ? (
-            <>
-              <div
-                style={{
-                  backgroundColor: "red",
-                  minWidth: "80px",
-                  width: "80px",
-                }}
-              >
-                En Oferta
-              </div>
-              <Box>
-                Ahora: {calculatePriceAfterDiscount(price, discount)}
-                <Box as="span" color="gray.600" fontSize="sm">
-                  / $
-                </Box>
-              </Box>
-            </>
-          ) : null}
 
           {component !== "cart" ? (
             <Button
