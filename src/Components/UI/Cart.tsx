@@ -28,9 +28,7 @@ const Cart: React.FC = () => {
             {!addItem.length
               ? linkTo
               : addItem.map((product) => (
-                  <>
-                    <Product key={product.id} {...product}  component="cart" />
-                  </>
+                  <Product key={product.id} {...product} component="cart" />
                 ))}
           </Flex>
         </Center>
