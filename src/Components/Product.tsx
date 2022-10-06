@@ -1,14 +1,9 @@
-import React, { useContext } from "react";
-import { Box, Image, Button, useToast, Flex } from "@chakra-ui/react";
-import { SelectItemsContext } from "../Components/context/SelectedItems";
-import {
-  ContextType,
-  ItemsContextInterface,
-} from "../Components/Interfaces/ContextType";
-import { ItemsContext } from "../Components/context/ItemsAddedContext";
+import React from "react";
+import { Box, Image } from "@chakra-ui/react";
 import Discount from "../Components/UI/Discount";
+import HomeAddToCartBtn from "./UI/HomeAddToCartBtn";
 
-interface Product {
+export interface IProduct {
   id: number;
   name: string;
   description: string;
@@ -16,10 +11,10 @@ interface Product {
   price: number;
   key: number;
   discount?: number;
-  component: string;
+  component?: string;
 }
 
-const Product: React.FC<Product> = ({
+const Product: React.FC<IProduct> = ({
   id,
   name,
   description,
@@ -27,11 +22,7 @@ const Product: React.FC<Product> = ({
   price,
   discount,
   component,
-}: Product) => {
-  const toast = useToast();
-  const { setAddedItem } = useContext(ItemsContext) as ItemsContextInterface;
-  const { setNumberItems } = useContext(SelectItemsContext) as ContextType;
-
+}: IProduct) => {
   return (
     <>
       <Box
@@ -81,31 +72,14 @@ const Product: React.FC<Product> = ({
           )}
 
           {component !== "cart" ? (
-            <Button
-              as="button"
-              borderRadius="md"
-              bg="blue"
-              color="white"
-              onClick={() => {
-                toast({
-                  title: `${name}`,
-                  description: "was added to your cart",
-                  status: "success",
-                  duration: 5000,
-                  isClosable: true,
-                });
-
-                setNumberItems((prev) => prev + 1);
-                setAddedItem((prev) => [
-                  ...prev,
-                  { id, name, price, description, image, discount },
-                ]);
-              }}
-              p="2px"
-              mt="10px"
-            >
-              Add to cart
-            </Button>
+            <HomeAddToCartBtn
+              id={id}
+              price={price}
+              name={name}
+              description={description}
+              image={image}
+              key={id}
+            />
           ) : null}
         </Box>
       </Box>
