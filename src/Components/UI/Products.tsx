@@ -24,13 +24,11 @@ const Products: React.FC = () => {
   const METHOD = "GET";
   const data = useFetch(METHOD, url);
 
-  
-
-  //filter by user query hook 
-  const filterData = useFilterByUserQuery(userQuery)
+  //filter by user query hook
+  const filterData = useFilterByUserQuery(userQuery);
   //setProducts(filterData)
 
-  console.log(filterData, "filter data lookokokokokokoko")
+  console.log(filterData, "filter data lookokokokokokoko");
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -100,7 +98,7 @@ const Products: React.FC = () => {
       </Center>
 
       <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
-        {data.map((product) => (
+        {/*data.map((product) => (
           <Product
             component="products"
             key={product.id}
@@ -111,8 +109,8 @@ const Products: React.FC = () => {
             price={Number(product.price)}
             discount={Number(product.discount)}
           />
-        ))}
-        {filterData &&
+        ))*/}
+        {/*filterData &&
           filterData.map((product) => (
             <Product
               component="products"
@@ -124,7 +122,33 @@ const Products: React.FC = () => {
               price={Number(product.price)}
               discount={Number(product.discount)}
             />
-          ))}
+          ))*/}
+
+        {filterData
+          ? filterData.map((product) => (
+              <Product
+                component="products"
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                description={product.description}
+                image={product.image}
+                price={Number(product.price)}
+                discount={Number(product.discount)}
+              />
+            ))
+          : data.map((product) => (
+              <Product
+                component="products"
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                description={product.description}
+                image={product.image}
+                price={Number(product.price)}
+                discount={Number(product.discount)}
+              />
+            ))}
       </Flex>
     </>
   );
