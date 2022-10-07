@@ -71,7 +71,7 @@ const Product: React.FC<IProduct> = ({
             </Box>
           )}
 
-          {component !== "cart" ? (
+          {component !== "cart" && (
             <HomeAddToCartBtn
               id={id}
               price={price}
@@ -81,7 +81,7 @@ const Product: React.FC<IProduct> = ({
               key={id}
               discount={discount}
             />
-          ) : null}
+          )}
         </Box>
       </Box>
     </>
