@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import RoutesComp from "./Components/Routes";
 import SmallWithSocial from "./Components/UI/Footer";
-import SelectedItems from "./Components/context/SelectedItems";
+import {SelectedItemsProvider} from "./Components/context/SelectedItems";
 import {ItemsContextProvider} from "./Components/context/ItemsAddedContext";
 
 
@@ -14,11 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ItemsContextProvider>
-    <SelectedItems>
+    <SelectedItemsProvider>
       <RoutesComp>
         <App />
       </RoutesComp>
-    </SelectedItems>
+    </SelectedItemsProvider>
     </ItemsContextProvider>
     <SmallWithSocial />
   </React.StrictMode>

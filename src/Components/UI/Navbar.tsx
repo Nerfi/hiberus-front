@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Flex } from "@chakra-ui/react";
 import {
@@ -9,11 +9,10 @@ import {
   Circle,
 } from "@chakra-ui/react";
 import { MdShoppingCart } from "react-icons/md";
-import { SelectItemsContext } from "../context/SelectedItems";
-import { ContextType } from "../Interfaces/ContextType";
+import { useSelectedItems } from "../context/SelectedItems";
 
 const Navbar: React.FC = () => {
-  const { numberItems } = useContext(SelectItemsContext) as ContextType;
+  const { numberItems } = useSelectedItems();
   return (
     <>
       <Flex justify="space-around" mt="1rem">

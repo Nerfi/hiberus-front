@@ -1,12 +1,11 @@
-import * as React from "react";
+import React, { useState, useContext, createContext } from "react";
 import { ContextType } from "../Interfaces/ContextType";
 import { ContextProps } from "../Interfaces/ContextType";
 
-export const SelectItemsContext = React.createContext<ContextType | number>(0);
+const SelectItemsContext = createContext<ContextType | number>(0);
 
-const SelectedItems = ({ children }: ContextProps) => {
-  const [numberItems, setNumberItems] = React.useState(0);
-
+export const SelectedItemsProvider = ({ children }: ContextProps) => {
+  const [numberItems, setNumberItems] = useState<number>(0);
   return (
     <SelectItemsContext.Provider value={{ numberItems, setNumberItems }}>
       {children}
@@ -14,4 +13,9 @@ const SelectedItems = ({ children }: ContextProps) => {
   );
 };
 
-export default SelectedItems;
+export const useSelectedItems = () => {
+  const { numberItems, setNumberItems } = useContext(
+    SelectItemsContext
+  ) as ContextType;
+  return { numberItems, setNumberItems };
+};
