@@ -1,63 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Product from "../Product";
-import { AxiosResponse } from "axios";
-import { Flex, Center, Input, Box, filter } from "@chakra-ui/react";
+import { Flex, Center, Input, Box } from "@chakra-ui/react";
 import { Items } from "../Interfaces/ContextType";
 import axiosConfig from "../../utils/axiosInstance";
 import { useToast } from "@chakra-ui/react";
-
-//
 import useFetch from "../../hooks/useFetch";
 import useFilterByUserQuery from "../../hooks/useFilterByQuery";
 
 const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
-  const [filteredProducts, setFilteredProducts] = useState<Items[]>([]);
-  const [products, setProducts] = useState<Items[]>([]);
+  const [_, setProducts] = useState<Items[]>([]);
   const [sortByPrice, setSort] = useState<boolean>(false);
   const asc = process.env.REACT_APP_ASC_ORDER_ULR;
   const desc = process.env.REACT_APP_DESC_ORDER_URL;
   const url = process.env.REACT_APP_MAIN_URL;
-  const searchQuery = process.env.REACT_APP_SEARCH_BY_QUERY;
   let sorting = sortByPrice ? asc : desc;
   const toast = useToast();
   const METHOD = "GET";
-  const data = useFetch(METHOD, url);
-
-  //filter by user query hook
+  const data = useFetch(url);
   const filterData = useFilterByUserQuery(userQuery);
-  //setProducts(filterData)
-
-  console.log(filterData, "filter data lookokokokokokoko");
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setQuery(e.target.value);
   };
-
-  /* DONDE WITH CUSTOM HOOKS
-  useEffect(() => {
-    const filterByUserQuery = async (query: string): Promise<void> => {
-      try {
-        const retrieveData: AxiosResponse<Items[]> = await axiosConfig(
-          "GET",
-          searchQuery + `${userQuery}`
-        );
-        setProducts(retrieveData.data);
-      } catch (error) {
-        toast({
-          title: `${error}`,
-          status: "error",
-          isClosable: true,
-        });
-      }
-    };
-
-    filterByUserQuery(userQuery);
-  }, [userQuery]);
-
-  */
 
   const handleSortByPrice = async (): Promise<void> => {
     try {
@@ -98,32 +65,6 @@ const Products: React.FC = () => {
       </Center>
 
       <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
-        {/*data.map((product) => (
-          <Product
-            component="products"
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            description={product.description}
-            image={product.image}
-            price={Number(product.price)}
-            discount={Number(product.discount)}
-          />
-        ))*/}
-        {/*filterData &&
-          filterData.map((product) => (
-            <Product
-              component="products"
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              description={product.description}
-              image={product.image}
-              price={Number(product.price)}
-              discount={Number(product.discount)}
-            />
-          ))*/}
-
         {filterData
           ? filterData.map((product) => (
               <Product

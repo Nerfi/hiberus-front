@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/react";
 
 const useFilterByUserQuery = (userQuery: string) => {
   const [filterData, setFilter] = useState<Items[]>();
-    const searchQuery = process.env.REACT_APP_SEARCH_BY_QUERY;
+  const searchUrl = process.env.REACT_APP_SEARCH_BY_QUERY;
 
   const toast = useToast();
   useEffect(() => {
@@ -14,7 +14,7 @@ const useFilterByUserQuery = (userQuery: string) => {
       try {
         const retrieveData: AxiosResponse<Items[]> = await axiosConfig(
           "GET",
-          searchQuery + `${userQuery}`
+          searchUrl + `${userQuery}`
         );
         setFilter(retrieveData.data);
       } catch (error) {

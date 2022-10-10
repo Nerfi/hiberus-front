@@ -4,11 +4,11 @@ import { Items } from "../Components/Interfaces/ContextType";
 import { useToast } from "@chakra-ui/react";
 import { AxiosResponse } from "axios";
 
-const useFetch = (method: string,url: any) => {
+const useFetch = (url: string | undefined) => {
   const [data, setData] = useState<Items[]>([]);
   const toast = useToast();
 
-    useEffect(() => {
+  useEffect(() => {
     const products = async (): Promise<void> => {
       try {
         const retrieveProdcuts: AxiosResponse<Items[]> = await axiosConfig(

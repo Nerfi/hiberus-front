@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import Product from "../Product";
 import { Box, Center, Flex } from "@chakra-ui/react";
-import { ItemsContext } from "../context/ItemsAddedContext";
-import { ItemsContextInterface } from "../Interfaces/ContextType";
 import { Link } from "react-router-dom";
+import { useItemsData } from "../context/ItemsAddedContext";
 
 const Cart: React.FC = () => {
-  const { addItem } = useContext(ItemsContext) as ItemsContextInterface;
+  const addItem = useItemsData();
+
   const linkTo = <Link to="/">Add somethign to your shopping cart</Link>;
 
   return (
@@ -21,9 +21,9 @@ const Cart: React.FC = () => {
             wrap="wrap"
             h="60vh"
           >
-            {!addItem.length
+            {!addItem.addItem.length
               ? linkTo
-              : addItem.map((product) => (
+              : addItem.addItem.map((product) => (
                   <Product key={product.id} {...product} component="cart" />
                 ))}
           </Flex>
