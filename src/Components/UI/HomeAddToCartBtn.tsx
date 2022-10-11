@@ -16,7 +16,7 @@ const HomeAddToCartBtn = ({
   const toast = useToast();
   const { setAddedItem } = useItemsData();
   const { setNumberItems } = useSelectedItems();
-  const { t } = useTranslation();
+  const { t } = useTranslation(["translations", "translations"]);
 
   return (
     <>
@@ -43,7 +43,7 @@ const HomeAddToCartBtn = ({
         p="2px"
         mt="10px"
       >
-        {t("cart.addTo")}
+        {t("addTo" , {ns: "translations"})}
       </Button>
     </>
   );

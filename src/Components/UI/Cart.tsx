@@ -8,9 +8,9 @@ import { useTranslation } from "react-i18next";
 
 const Cart: React.FC = () => {
   const addItem = useItemsData();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation(["translations", "translations"]);
 
-  const linkTo = <Link to="/">{t("cart.add")}</Link>;
+  const linkTo = <Link to="/">{t("add", {ns: "translations"})}</Link>;
 
   return (
     <>

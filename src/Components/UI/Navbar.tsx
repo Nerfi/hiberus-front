@@ -22,7 +22,7 @@ const lngs = {
 
 const Navbar: React.FC = () => {
   const { numberItems } = useSelectedItems();
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(["translations", "translations"]);
   return (
     <>
       {/*test content in order to follow tutorial, delete after
@@ -46,12 +46,16 @@ const Navbar: React.FC = () => {
         <Breadcrumb>
           <BreadcrumbItem>
             <Link to="/">
+              {/*
               <Trans i18nKey="cart.home">Home</Trans>
+              */}
+              {t("home", {ns: "translations"})}
+              
             </Link>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <Link to="/cart"> {t("cart.address")} </Link>
+            <Link to="/cart"> {t("address", {ns: "translations"})} </Link>
           </BreadcrumbItem>
         </Breadcrumb>
 

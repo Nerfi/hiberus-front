@@ -6,6 +6,8 @@ import axiosConfig from "../../utils/axiosInstance";
 import { useToast } from "@chakra-ui/react";
 import useFetch from "../../hooks/useFetch";
 import useFilterByUserQuery from "../../hooks/useFilterByQuery";
+import { useTranslation } from "react-i18next";
+
 
 const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
@@ -19,6 +21,8 @@ const Products: React.FC = () => {
   const METHOD = "GET";
   const data = useFetch(url);
   const filterData = useFilterByUserQuery(userQuery);
+  const { t } = useTranslation(["translations", "translations"]);
+
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -60,7 +64,7 @@ const Products: React.FC = () => {
             id=""
             onClick={handleSortByPrice}
           />
-          <label>Sort by price</label>
+          <label>{t("sort", {ns: "translations"})}</label>
         </Box>
       </Center>
 
