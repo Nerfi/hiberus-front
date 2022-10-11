@@ -11,18 +11,47 @@ import {
 import { MdShoppingCart } from "react-icons/md";
 import { useSelectedItems } from "../context/SelectedItems";
 
+//i18next
+import { useTranslation, Trans } from "react-i18next";
+
+//definning language switcher
+const lngs = {
+  en: { nativeName: "English" },
+  de: { nativeName: "Deutsch" },
+};
+
 const Navbar: React.FC = () => {
   const { numberItems } = useSelectedItems();
+  const { t, i18n } = useTranslation();
   return (
     <>
+      {/*test content in order to follow tutorial, delete after
+    https://stackoverflow.com/questions/57086672/element-implicitly-has-an-any-type-because-expression-of-type-string-cant-b
+    */}
+      <div>
+        {Object.keys(lngs).map((lng) => (
+          <button
+            key={lng}
+            style={{
+              fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
+            }}
+            type="submit"
+            onClick={() => i18n.changeLanguage(lng)}
+          >
+            {lngs[lng as keyof typeof lngs].nativeName}
+          </button>
+        ))}
+      </div>
       <Flex justify="space-around" mt="1rem">
         <Breadcrumb>
           <BreadcrumbItem>
-            <Link to="/">Home</Link>{" "}
+            <Link to="/">
+              <Trans i18nKey="cart.home">Home</Trans>
+            </Link>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart"> {t("cart.address")} </Link>
           </BreadcrumbItem>
         </Breadcrumb>
 

@@ -3,6 +3,7 @@ import { Button, useToast } from "@chakra-ui/react";
 import { IProduct } from "../Product";
 import { useSelectedItems } from "../context/SelectedItems";
 import { useItemsData } from "../context/ItemsAddedContext";
+import { useTranslation } from "react-i18next";
 
 const HomeAddToCartBtn = ({
   id,
@@ -13,8 +14,10 @@ const HomeAddToCartBtn = ({
   discount,
 }: IProduct) => {
   const toast = useToast();
-  const  {setAddedItem}  = useItemsData();
-  const {setNumberItems} = useSelectedItems();
+  const { setAddedItem } = useItemsData();
+  const { setNumberItems } = useSelectedItems();
+  const { t } = useTranslation();
+
   return (
     <>
       <Button
@@ -40,7 +43,7 @@ const HomeAddToCartBtn = ({
         p="2px"
         mt="10px"
       >
-        Add to cart
+        {t("cart.addTo")}
       </Button>
     </>
   );

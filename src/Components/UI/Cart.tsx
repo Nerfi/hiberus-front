@@ -3,11 +3,14 @@ import Product from "../Product";
 import { Box, Center, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useItemsData } from "../context/ItemsAddedContext";
+//i18next
+import { useTranslation } from "react-i18next";
 
 const Cart: React.FC = () => {
   const addItem = useItemsData();
+  const { t, i18n } = useTranslation();
 
-  const linkTo = <Link to="/">Add somethign to your shopping cart</Link>;
+  const linkTo = <Link to="/">{t("cart.add")}</Link>;
 
   return (
     <>
