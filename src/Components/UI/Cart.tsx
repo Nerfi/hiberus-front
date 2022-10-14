@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useItemsData } from "../context/ItemsAddedContext";
 //i18next
 import { useTranslation } from "react-i18next";
+//stripe payment component 
+import StripePayment from "./Stripe";
 
 const Cart: React.FC = () => {
   const addItem = useItemsData();
@@ -32,6 +34,7 @@ const Cart: React.FC = () => {
           </Flex>
         </Center>
       </Box>
+      <StripePayment/>
     </>
   );
 };
