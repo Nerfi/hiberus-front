@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 import { useItemsData } from "../context/ItemsAddedContext";
 //i18next
 import { useTranslation } from "react-i18next";
-//stripe payment component 
+//stripe payment component
 import StripePayment from "./Stripe";
 
 const Cart: React.FC = () => {
   const addItem = useItemsData();
   const { t } = useTranslation(["translations", "translations"]);
 
-  const linkTo = <Link to="/">{t("add", {ns: "translations"})}</Link>;
+  const linkTo = <Link to="/">{t("add", { ns: "translations" })}</Link>;
 
   return (
     <>
-      <Box h="90vh">
+      <Box h="90vh" border="solid red">
         <Center bg="transparent" h="90vh" color="black">
           <Flex
             justify="center"
@@ -33,8 +33,10 @@ const Cart: React.FC = () => {
                 ))}
           </Flex>
         </Center>
+        <Flex justify="center">
+          <StripePayment />
+        </Flex>
       </Box>
-      <StripePayment/>
     </>
   );
 };

@@ -1,11 +1,23 @@
 import React, { FormEvent, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useItemsData } from "../context/ItemsAddedContext";
+import { useToast } from "@chakra-ui/react";
 
-//añadir toas para  manerjar el error de la tarjeta
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const [error, setError] = useState(null);
+  const addItem = useItemsData();
+  const toast = useToast();
+
+  const finalPayment = addItem.addItem
+    .map((item) => {
+      const withDiscount = item.discount
+        ? item.price - item.discount
+        : item.price;
+
+      return withDiscount;
+    })
+    .reduce((prev, curr) => prev + curr, 0);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +31,11 @@ const CheckoutForm = () => {
       card: elements.getElement(CardElement),
     });
 
-    setError(error && error.message);
+    toast({
+      title: `${error.message}`,
+      status: "error",
+      isClosable: true,
+    });
   };
 
   const cardStyle = {
@@ -43,11 +59,10 @@ const CheckoutForm = () => {
 
   return (
     <>
-      {error && error}
       <form onSubmit={handleSubmit}>
         <CardElement options={cardStyle} />
         <button type="submit" disabled={!stripe || !elements}>
-          Pay:
+          Pay: {finalPayment}
         </button>
       </form>
     </>

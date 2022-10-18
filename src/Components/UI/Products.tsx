@@ -8,10 +8,9 @@ import useFetch from "../../hooks/useFetch";
 import useFilterByUserQuery from "../../hooks/useFilterByQuery";
 import { useTranslation } from "react-i18next";
 
-
 const Products: React.FC = () => {
   const [userQuery, setQuery] = useState<string>("");
-  const [_, setProducts] = useState<Items[]>([]);
+  const [sortedProducts, setProducts] = useState<Items[]>([]);
   const [sortByPrice, setSort] = useState<boolean>(false);
   const asc = process.env.REACT_APP_ASC_ORDER_ULR;
   const desc = process.env.REACT_APP_DESC_ORDER_URL;
@@ -19,10 +18,9 @@ const Products: React.FC = () => {
   let sorting = sortByPrice ? asc : desc;
   const toast = useToast();
   const METHOD = "GET";
-  const data = useFetch(url);
+  let data = useFetch(url);
   const filterData = useFilterByUserQuery(userQuery);
   const { t } = useTranslation(["translations", "translations"]);
-
 
   const handleChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -64,37 +62,61 @@ const Products: React.FC = () => {
             id=""
             onClick={handleSortByPrice}
           />
-          <label>{t("sort", {ns: "translations"})}</label>
+          <label>{t("sort", { ns: "translations" })}</label>
         </Box>
       </Center>
 
-      <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
-        {filterData
-          ? filterData.map((product) => (
-              <Product
-                component="products"
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                image={product.image}
-                price={Number(product.price)}
-                discount={Number(product.discount)}
-              />
-            ))
-          : data.map((product) => (
-              <Product
-                component="products"
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                image={product.image}
-                price={Number(product.price)}
-                discount={Number(product.discount)}
-              />
-            ))}
-      </Flex>
+      {sortByPrice ? (
+        <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
+          {sortedProducts.map((product) => (
+            <Product
+              component="products"
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              description={product.description}
+              image={product.image}
+              price={Number(product.price)}
+              discount={Number(product.discount)}
+            />
+          ))}
+        </Flex>
+      ) : (
+        <Flex
+          justify="center"
+          m="6em"
+          gap="10%"
+          wrap="wrap"
+          h="60vh"
+          display={sortByPrice ? "none" : "center"}
+        >
+          {filterData
+            ? filterData.map((product) => (
+                <Product
+                  component="products"
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  description={product.description}
+                  image={product.image}
+                  price={Number(product.price)}
+                  discount={Number(product.discount)}
+                />
+              ))
+            : data.map((product) => (
+                <Product
+                  component="products"
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  description={product.description}
+                  image={product.image}
+                  price={Number(product.price)}
+                  discount={Number(product.discount)}
+                />
+              ))}
+        </Flex>
+      )}
     </>
   );
 };
