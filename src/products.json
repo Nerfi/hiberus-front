@@ -4,7 +4,7 @@
             "id": 1,
             "name": "Bag",
             "description": "A beutiful bag",
-            "image": "./assets/bag.jpg",
+            "image": "../assets/bag.jpg",
             "price": "10.89",
             "discount": "10"
         },
@@ -12,7 +12,7 @@
             "id": 2,
             "name": "Bottle",
             "description": "A useful bottle to drink you favourite drink",
-            "image": "./assests/bottle.jpg",
+            "image": "./assetss/bottle.jpg",
             "price": "20.10",
             "discount": "20"
         },
