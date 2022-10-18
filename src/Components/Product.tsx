@@ -32,7 +32,13 @@ const Product: React.FC<IProduct> = ({
         overflow="hidden"
         border="4px"
       >
-        <Image src={image} alt={description} />
+        <Image
+          boxSize="150px"
+          objectFit="cover"
+          src={image}
+          alt={description}
+          loading="eager"
+        />
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">

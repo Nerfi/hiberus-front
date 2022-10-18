@@ -12,7 +12,7 @@
             "id": 2,
             "name": "Bottle",
             "description": "A useful bottle to drink you favourite drink",
-            "image": "./assetss/bottle.jpg",
+            "image": "../assets/bottle.jpg",
             "price": "20.10",
             "discount": "20"
         },
@@ -20,7 +20,7 @@
             "id": 3,
             "name": "Cake",
             "description": "A delicious yellow cake",
-            "image": "./cake.jpg",
+            "image": "../assets/cake.jpg",
             "price": "30.00",
             "discount": null
         },
@@ -28,7 +28,7 @@
             "id": 4,
             "name": "Cup",
             "description": "A beautiful pink cup",
-            "image": "./cup.jpg",
+            "image": "../assets/cup.jpg",
             "price": "12.20",
             "discount": "5"
         },
@@ -36,7 +36,7 @@
             "id": 5,
             "name": "Drink",
             "description": "A deliciuos drink, you can buy it along the bottle to carry on the drink anywhere",
-            "image": "./drink.jpg",
+            "image": "../assets/drink.jpg",
             "price": "8.00",
             "discount": null
         },
@@ -44,7 +44,7 @@
             "id": 6,
             "name": "Headphones",
             "description": "A useful headphones to listen your favourite music",
-            "image": "./headphones.jpg",
+            "image": "../assets/headphones.jpg",
             "price": "125.90",
             "discount": "50"
         },
@@ -60,7 +60,7 @@
             "id": 8,
             "name": "Speaker",
             "description": "A useful and beautiful speaker",
-            "image": "./speaker.jpg",
+            "image": "../assets/speaker.jpg",
             "price": "35.90",
             "discount": null
         },
@@ -68,7 +68,7 @@
             "id": 9,
             "name": "Sunglasses",
             "description": "Sunglasses to protect your eyes against the sun",
-            "image": "./sunglasses.jpg",
+            "image": "../assets/sunglasses.jpg",
             
             "price": "30.00",
             "discount": "2"
@@ -77,7 +77,7 @@
             "id": 10,
             "name": "Watch",
             "description": "A very useful smartwatch",
-            "image": "./watch.jpg",
+            "image": "../assets/watch.jpg",
             "price": "230.00",
             "discount": null
         }

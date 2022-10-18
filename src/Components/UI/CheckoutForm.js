@@ -62,7 +62,7 @@ const CheckoutForm = () => {
       <form onSubmit={handleSubmit}>
         <CardElement options={cardStyle} />
         <button type="submit" disabled={!stripe || !elements}>
-          Pay: {finalPayment}
+          Pay: {finalPayment.toFixed(2)}
         </button>
       </form>
     </>
