@@ -16,26 +16,17 @@ const Cart: React.FC = () => {
 
   return (
     <>
-      <Box h="90vh" border="solid red">
-        <Center bg="transparent" h="90vh" color="black">
-          <Flex
-            justify="center"
-            m="6em"
-            w="100%"
-            gap="10%"
-            wrap="wrap"
-            h="60vh"
-          >
-            {!addItem.addItem.length
-              ? linkTo
-              : addItem.addItem.map((product) => (
-                  <Product key={product.id} {...product} component="cart" />
-                ))}
-          </Flex>
-        </Center>
-        <Flex justify="center">
-          <StripePayment />
+      <Box>
+        <Flex justify="center" p="3rem" w="100%" gap="10%" wrap="wrap">
+          {!addItem.addItem.length
+            ? linkTo
+            : addItem.addItem.map((product) => (
+                <Product key={product.id} {...product} component="cart" />
+              ))}
         </Flex>
+        <Center>
+          <StripePayment />
+        </Center>
       </Box>
     </>
   );

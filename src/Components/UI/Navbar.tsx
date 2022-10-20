@@ -11,17 +11,16 @@ import {
 import { MdShoppingCart } from "react-icons/md";
 import { useSelectedItems } from "../context/SelectedItems";
 //i18next
-import { useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import LanguageSwitcherBtn from "./LanguageSwitchBtn";
-
 
 const Navbar: React.FC = () => {
   const { numberItems } = useSelectedItems();
   const { t } = useTranslation(["translations", "translations"]);
   return (
     <>
-    <LanguageSwitcherBtn/>
-    
+      <LanguageSwitcherBtn />
+
       <Flex justify="space-around" mt="1rem">
         <Breadcrumb>
           <BreadcrumbItem>
@@ -29,13 +28,12 @@ const Navbar: React.FC = () => {
               {/*
               <Trans i18nKey="cart.home">Home</Trans>
               */}
-              {t("home", {ns: "translations"})}
-              
+              {t("home", { ns: "translations" })}
             </Link>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <Link to="/cart"> {t("address", {ns: "translations"})} </Link>
+            <Link to="/cart"> {t("address", { ns: "translations" })} </Link>
           </BreadcrumbItem>
         </Breadcrumb>
 
