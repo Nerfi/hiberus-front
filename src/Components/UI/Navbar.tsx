@@ -24,12 +24,7 @@ const Navbar: React.FC = () => {
       <Flex justify="space-around" mt="1rem">
         <Breadcrumb>
           <BreadcrumbItem>
-            <Link to="/">
-              {/*
-              <Trans i18nKey="cart.home">Home</Trans>
-              */}
-              {t("home", { ns: "translations" })}
-            </Link>
+            <Link to="/">{t("home", { ns: "translations" })}</Link>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
