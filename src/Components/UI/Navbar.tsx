@@ -1,13 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Box,
-  Flex,
-  Icon,
-  Circle,
-} from "@chakra-ui/react";
 import { MdShoppingCart } from "react-icons/md";
 import { useSelectedItems } from "../context/SelectedItems";
 //i18next
@@ -20,27 +12,46 @@ const Navbar: React.FC = () => {
   return (
     <>
       <LanguageSwitcherBtn />
-
-      <Flex justify="space-around" mt="1rem">
-        <Breadcrumb>
-          <BreadcrumbItem>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          marginTop: "1rem",
+        }}
+      >
+        <ul style={{ display: "flex", gap: "1rem", listStyle: "none" }}>
+          <li>
             <Link to="/">{t("home", { ns: "translations" })}</Link>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem>
+          </li>
+          <span>/</span>
+          <li>
             <Link to="/cart"> {t("address", { ns: "translations" })} </Link>
-          </BreadcrumbItem>
-        </Breadcrumb>
-
-        <Box display="flex">
+          </li>
+        </ul>
+        <div style={{ display: " flex" }}>
           <Link to="/cart">
-            <Icon as={MdShoppingCart} />
+            <p>
+              {" "}
+              <MdShoppingCart />
+            </p>
           </Link>
-          <Circle size="17px" bg="tomato" color="white">
+
+          <div
+            className="circle"
+            style={{
+              height: "25px",
+              width: "25px",
+              borderRadius: "50%",
+              backgroundColor: "tomato",
+              color: "white",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {numberItems}
-          </Circle>
-        </Box>
-      </Flex>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

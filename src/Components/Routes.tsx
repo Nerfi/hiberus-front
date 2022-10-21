@@ -9,16 +9,14 @@ interface RoutesCompProps {
 }
 const RoutesComp = ({ children }: RoutesCompProps) => {
   return (
-    <>
-      <BrowserRouter>
-        {children}
-        <Routes>
-          <Route path="cart" element={<Cart />} />
-          <Route path="/" element={<Products />} />
-        </Routes>
-        <ChakraProvider></ChakraProvider>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      {children}
+      <Routes>
+        <Route path="cart" element={<Cart />} />
+        <Route path="/" element={<Products />} />
+      </Routes>
+      <ChakraProvider></ChakraProvider>
+    </BrowserRouter>
   );
 };
 
