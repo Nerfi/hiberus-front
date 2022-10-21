@@ -11,7 +11,7 @@ export default function SmallWithSocial() {
       }}
     >
       <p style={{ display: "flex", justifyContent: "center" }}>
-        © All right reserved{" "}
+        © All right reserved {new Date().getFullYear()}
       </p>
     </div>
   );

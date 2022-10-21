@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Flex } from "@chakra-ui/react";
 import {
   Breadcrumb,
   BreadcrumbItem,
   Box,
+  Flex,
   Icon,
   Circle,
 } from "@chakra-ui/react";
