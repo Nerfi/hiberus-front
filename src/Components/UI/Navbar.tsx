@@ -14,7 +14,6 @@ const Navbar: React.FC = () => {
       <LanguageSwitcherBtn />
       <div
         style={{
-          border: "solid red",
           display: "flex",
           justifyContent: "space-around",
           marginTop: "1rem",
