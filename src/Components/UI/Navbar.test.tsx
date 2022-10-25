@@ -14,8 +14,6 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import userEvent from "@testing-library/user-event";
 //
-//test in order to fix issue in console 
-
 import translationsEn from "../../../public/locales/en/translations.json"
 import translationsDe from "../../../public/locales/de/translations.json"
 
@@ -27,23 +25,6 @@ const nav = (
 );
 
 //languages
-/*
-const resources = {
-  en: {
-    translation: {
-      " home": "Home",
-      address: "Cart",
-    },
-  },
-  de: {
-    translation: {
-      home: "Haus ",
-      address: "Wagen ",
-      //"Welcome to React": "Bem vindo ao React e ao react-i18next",
-    },
-  },
-};
-*/
 
 const resources = {
   en: {
