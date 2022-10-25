@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { render, screen } from "@testing-library/react";
+import React from "react";
+import { render, screen, within } from "@testing-library/react";
 //import the component to test
 import Navbar from "./Navbar";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -44,7 +44,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "en",
-    debug: false,
+    debug: true,
     resources: {
       en: resources.en,
       de: resources.de,
@@ -61,12 +61,12 @@ const MainView = withTranslation()((props) => {
         <button onClick={() => props.i18n.changeLanguage("de")}>de</button>
         <button onClick={() => props.i18n.changeLanguage("en")}>en</button>
       </div>
-      <ul>
+      <ul aria-labelledby="navbar-heading">
         <li>
-          <Trans>Home</Trans>
+          <Trans i18nKey="home">Home</Trans>
         </li>
         <li>
-          <Trans>Cart</Trans>
+          <Trans i18nKey="address">Cart</Trans>
         </li>
       </ul>
     </>
@@ -74,12 +74,12 @@ const MainView = withTranslation()((props) => {
 });
 
 //revisar el nombre dado a la funcion
-function rendesr(ui: JSX.Element, options?: undefined) {
+function rendesr(ui: JSX.Element, options?: {}) {
   function Wrapper({ children }: any) {
     return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
   }
   return {
-    ...render(ui, { wrapper: Wrapper }),
+    ...render(ui, { wrapper: Wrapper, ...options }),
   };
 }
 
@@ -106,32 +106,24 @@ test("it shows button to toggle languages", () => {
 
 test("it should test lang", () => {
   rendesr(<MainView useSuspense={false} />);
-  //const enBtn = screen.getByRole("button", { name: /english/i });
-  //const deBtn = screen.getByRole("button", { name: /Deutsch/i });
-  //const linkHouseElement = screen.getByText(/home/i);
-  // aqui nosotros heading lo cambiamos para seleccionar lo que nososotros queremos y sabemos que va cambiar de lang
-  //const homeChangeName = screen.getByRole("link", { name: /home/i });
-  //const cartChangeName = screen.getByRole("link", { name: /address/i });
-  //expect(enBtn).toHaveTextContent("English") workign
-  //tenemos que añadir lo que aparece en sandbox y qe no he puesto
-  //MainView es el componente
-  //userEvent.click(deBtn);
-  //expect(linkHouseElement).toHaveTextContent(/haus/i);
-});
+  const enBtn = screen.getByRole("button", { name: /en/i });
+  const deBtn = screen.getByRole("button", { name: /de/i });
 
-/*
-test("incremenet number item when click on select one", () => {
-  // const user =  userEvent.setup()
-  render(
-    <Router>
-      <Navbar />
-    </Router>
-  );
+  //selecting the LI in order to make sure it has the desire length
+  const homeChangeName = screen.getByRole("list");
+  const { getAllByRole } = within(homeChangeName);
+  const items = getAllByRole("listitem");
+  expect(items.length).toBe(2);
 
-  //mock function jest
-  const mockFucntionClicked = jest.fn().mockName("setNumberItems");
-  //llamar a la funciton con user event 
-  screen.debug()
-  
+  const listElementToChange = screen.getAllByRole("listitem");
+
+  //default values
+  expect(listElementToChange[1]).toHaveTextContent(/cart/i);
+  expect(listElementToChange[0]).toHaveTextContent(/home/i);
+  userEvent.click(deBtn);
+  expect(listElementToChange[0]).toHaveTextContent(/Haus/i);
+  expect(listElementToChange[1]).toHaveTextContent(/Wagen/i);
+  userEvent.click(enBtn);
+  expect(listElementToChange[1]).toHaveTextContent(/cart/i);
+  expect(listElementToChange[0]).toHaveTextContent(/home/i);
 });
-*/
