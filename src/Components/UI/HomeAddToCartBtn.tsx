@@ -5,6 +5,8 @@ import { useSelectedItems } from "../context/SelectedItems";
 import { useItemsData } from "../context/ItemsAddedContext";
 import { useTranslation } from "react-i18next";
 
+
+//reescribir componente para pasar tests
 const HomeAddToCartBtn = ({
   id,
   price,
