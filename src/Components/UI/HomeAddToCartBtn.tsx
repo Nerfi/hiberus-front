@@ -5,7 +5,6 @@ import { useSelectedItems } from "../context/SelectedItems";
 import { useItemsData } from "../context/ItemsAddedContext";
 import { useTranslation } from "react-i18next";
 
-
 //reescribir componente para pasar tests
 const HomeAddToCartBtn = ({
   id,
@@ -20,34 +19,42 @@ const HomeAddToCartBtn = ({
   const { setNumberItems } = useSelectedItems();
   const { t } = useTranslation(["translations", "translations"]);
 
+  function handleClicl() {
+    toast({
+      title: `${name}`,
+      description: "was added to your cart",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+
+    setNumberItems((prev) => prev + 1);
+    setAddedItem((prev) => [
+      ...prev,
+      { id, name, price, description, image, discount },
+    ]);
+  }
 
   return (
     <>
-      <Button
-        as="button"
-        borderRadius="md"
-        bg="blue"
-        color="white"
-        onClick={() => {
-          toast({
-            title: `${name}`,
-            description: "was added to your cart",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
-
-          setNumberItems((prev) => prev + 1);
-          setAddedItem((prev) => [
-            ...prev,
-            { id, name, price, description, image, discount },
-          ]);
+      <button
+        style={{
+          backgroundColor: "#4CAF50",
+          border: "none",
+          color: "#fff",
+          padding: "15px 32px",
+          textAlign: "center",
+          textDecoration: "none",
+          display: "inline-block",
+          fontSize: "16px",
+          margin: "4px 2px",
+          cursor: "pointer",
         }}
-        p="2px"
-        mt="10px"
+        onClick={handleClicl}
       >
-        {t("addTo" , {ns: "translations"})}
-      </Button>
+     
+        {t("addTo", { ns: "translations" })}
+      </button>
     </>
   );
 };
