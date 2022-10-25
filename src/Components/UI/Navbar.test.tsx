@@ -14,6 +14,10 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import userEvent from "@testing-library/user-event";
 //
+//test in order to fix issue in console 
+
+import translationsEn from "../../../public/locales/en/translations.json"
+import translationsDe from "../../../public/locales/de/translations.json"
 
 //global component DRY
 const nav = (
@@ -23,6 +27,7 @@ const nav = (
 );
 
 //languages
+/*
 const resources = {
   en: {
     translation: {
@@ -38,6 +43,16 @@ const resources = {
     },
   },
 };
+*/
+
+const resources = {
+  en: {
+    translation: translationsEn
+  },
+  de: {
+    translation: translationsDe
+  }
+}
 
 i18n
   .use(LanguageDetector)
