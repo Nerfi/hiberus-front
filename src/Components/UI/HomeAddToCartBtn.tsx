@@ -24,7 +24,7 @@ const HomeAddToCartBtn = ({
   const { t } = useTranslation(["translations", "translations"]);
   const [show, setShow] = useState<boolean>(false);
 
-  function handleClicl() {
+  function handleClick() {
     /* toast({
       title: `${name}`,
       description: "was added to your cart",
@@ -62,7 +62,7 @@ const HomeAddToCartBtn = ({
           margin: "4px 2px",
           cursor: "pointer",
         }}
-        onClick={handleClicl}
+        onClick={handleClick}
       >
         {t("addTo", { ns: "translations" })}
       </button>
