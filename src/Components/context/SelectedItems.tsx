@@ -2,7 +2,7 @@ import React, { useState, useContext, createContext } from "react";
 import { ContextType } from "../Interfaces/ContextType";
 import { ContextProps } from "../Interfaces/ContextType";
 
-const SelectItemsContext = createContext<ContextType | number>(0);
+export const SelectItemsContext = createContext<ContextType | number>(0);
 
 export const SelectedItemsProvider = ({ children }: ContextProps) => {
   const [numberItems, setNumberItems] = useState<number>(0);

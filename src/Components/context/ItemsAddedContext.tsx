@@ -2,7 +2,7 @@ import React, { useState, useContext, createContext } from "react";
 import { Items, ItemsContextInterface } from "../Interfaces/ContextType";
 import { ContextProps } from "../Interfaces/ContextType";
 
-const ItemsContext = createContext<ItemsContextInterface | null>(null);
+export const ItemsContext = createContext<ItemsContextInterface | null>(null);
 
 export const ItemsContextProvider = ({ children }: ContextProps) => {
   const [addItem, setAddedItem] = useState<Items[]>([]);
