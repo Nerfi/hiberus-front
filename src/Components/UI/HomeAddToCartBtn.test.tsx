@@ -93,8 +93,11 @@ describe("testing context consumer", () => {
     //its a local state update
     //expect(providerProps.setShow).toHaveBeenCalled();
     expect(providerProps.setAddedItem).toHaveBeenCalled();
+    expect(providerProps.setAddedItem).toHaveBeenCalledTimes(1);
     //expect(providerProps.setAddedItem).toHaveBeenCalledWith(id, name,price,)
     expect(providerProps.setNumberItems).toHaveBeenCalled();
+    expect(providerProps.setNumberItems).toHaveBeenCalledTimes(1);
     //expect(providerProps.setShow).toHaveBeenCalled();
+    //expect(providerProps.setShow).toHaveBeenCalled()
   });
 });
