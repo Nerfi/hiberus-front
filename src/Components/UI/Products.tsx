@@ -22,7 +22,10 @@ const Products: React.FC = () => {
   const filterData = useFilterByUserQuery(userQuery);
   const { t } = useTranslation(["translations", "translations"]);
 
+
+
   const handleChange = (e: {
+  
     target: { value: React.SetStateAction<string> };
   }) => {
     setQuery(e.target.value);
