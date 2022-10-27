@@ -73,11 +73,11 @@ describe("testing context consumer", () => {
       <HomeAddToCartBtn
         key={0}
         id={0}
-        name={""}
-        description={""}
+        name="Bag"
+        description="A beautiful bag"
         image={""}
-        price={0}
-        discount={0}
+        price={10.89}
+        discount={10}
       />,
       { providerProps }
     );
@@ -85,7 +85,6 @@ describe("testing context consumer", () => {
     const addToCartBtn = screen.getByRole("button");
 
     expect(addToCartBtn).toBeInTheDocument();
-    //console.log(addToCartBtn.textContent)
     expect(addToCartBtn.textContent).toBe("addTo");
     //calling the funcitons
 
