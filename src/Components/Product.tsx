@@ -34,7 +34,7 @@ const Product: React.FC<IProduct> = ({
         <img
           src={image}
           alt={description}
-          style={{ objectFit: "cover", height: "250px", width: "auto" }}
+          style={{ objectFit: "cover", height: "250px", width: "280px"}}
           loading="lazy"
         />
 
