@@ -9,10 +9,13 @@ import { ItemsContext } from "../context/ItemsAddedContext";
 import { SelectItemsContext } from "../context/SelectedItems";
 //interface product
 import { IProduct } from "../Product";
-
-// A custom provider, not the ItemsContext, to test it in isolation.
+import { Trans, withTranslation, initReactI18next } from "react-i18next";
+import i18n from "i18next"; // A custom provider, not the ItemsContext, to test it in isolation.
 // This customRender will be a fake ItemsContext, one that I can controll to abstract of ItemsContext issues.
-
+import LanguageDetector from "i18next-browser-languagedetector";
+//json with translations
+import translationsEn from "../../../public/locales/en/translations.json";
+import translationsDe from "../../../public/locales/de/translations.json";
 const customRender = (
   ui: React.ReactNode,
   { providerProps, ...renderOptions }: any
@@ -21,7 +24,6 @@ const customRender = (
     <ItemsContext.Provider value={providerProps}>
       <SelectItemsContext.Provider value={providerProps}>
         {ui}
-        {/*<button data-testid="btnToTestFuncCalls"></button> */}
       </SelectItemsContext.Provider>
     </ItemsContext.Provider>,
     renderOptions
@@ -30,6 +32,16 @@ const customRender = (
 
 //testing i18 from docs
 
+const resources = {
+  en: {
+    translation: translationsEn,
+  },
+  de: {
+    translation: translationsDe,
+  },
+};
+
+/*
 jest.mock("react-i18next", () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
 
@@ -37,11 +49,25 @@ jest.mock("react-i18next", () => ({
     return {
       t: (str: string) => str,
       i18n: {
-        changeLanguage: () => new Promise(() => {}),
+        changeLanguage: jest.fn() 
       },
     };
   },
 }));
+*/
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: "en",
+    debug: true,
+    resources,
+    lng: "en",
+    interpolation: {
+      escapeValue: false, // not needed for react as it escapes by default
+    },
+  });
 
 //
 
@@ -60,14 +86,14 @@ interface ProProps {
   setShow: () => boolean;
 }
 
-describe("testing context consumer", () => {
-  let providerProps: ProProps;
-  providerProps = {
-    setAddedItem: jest.fn(),
-    setNumberItems: jest.fn(),
-    setShow: jest.fn(),
-  };
+let providerProps: ProProps;
+providerProps = {
+  setAddedItem: jest.fn(),
+  setNumberItems: jest.fn(),
+  setShow: jest.fn(),
+};
 
+describe("testing context consumer", () => {
   test("should call functions when button click", () => {
     customRender(
       <HomeAddToCartBtn
@@ -99,5 +125,46 @@ describe("testing context consumer", () => {
     expect(providerProps.setNumberItems).toHaveBeenCalledTimes(1);
     //expect(providerProps.setShow).toHaveBeenCalled();
     //expect(providerProps.setShow).toHaveBeenCalled()
+  });
+});
+
+//testing change language when btn clikde
+//mock component for testing
+const MainView = withTranslation()((props) => {
+  return (
+    <>
+      <div className="App-header">
+        <button onClick={() => props.i18n.changeLanguage("de")}>de</button>
+        <button onClick={() => props.i18n.changeLanguage("en")}>en</button>
+      </div>
+      <button>
+        <Trans i18nKey="addTo">AddTo</Trans>
+      </button>
+    </>
+  );
+});
+
+describe("<HomeAddToCartBtn/> change language when selected new language", () => {
+  test("change title of btn when selected new lng", () => {
+    render(<MainView />);
+
+    expect(screen.getByRole("button", { name: "en" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "de" })).toBeInTheDocument();
+    //user events and change language
+    expect(
+      screen.getByRole("button", { name: /add to cart/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /add to cart/i })
+    ).toHaveTextContent(/add to cart/i);
+    userEvent.click(screen.getByRole("button", { name: "en" }));
+    expect(
+      screen.getByRole("button", { name: /add to cart/i })
+    ).toHaveTextContent(/add to cart/i);
+
+    userEvent.click(screen.getByRole("button", { name: "de" }));
+    expect(
+      screen.getByRole("button", { name: /zum Warenkorb hinzufügen/i })
+    ).toHaveTextContent(/zum Warenkorb hinzufügen/i);
   });
 });
