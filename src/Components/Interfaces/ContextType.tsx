@@ -17,6 +17,7 @@ export interface Items {
 }
 
 export interface ItemsContextInterface {
-  addItem: Items[];
+  addItem: Items[] 
+  
   setAddedItem: React.Dispatch<React.SetStateAction<Items[]>>;
 }

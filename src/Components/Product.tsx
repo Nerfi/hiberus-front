@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Image } from "@chakra-ui/react";
 import Discount from "../Components/UI/Discount";
 import HomeAddToCartBtn from "./UI/HomeAddToCartBtn";
 
@@ -12,6 +11,7 @@ export interface IProduct {
   key: number;
   discount: number;
   component?: string;
+
 }
 
 const Product: React.FC<IProduct> = ({
@@ -25,57 +25,48 @@ const Product: React.FC<IProduct> = ({
 }: IProduct) => {
   return (
     <>
-      <Box
-        maxW="sm"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        border="4px"
+      <div
+        style={{
+          maxWidth: "280px",
+          border: "4px solid #000",
+        }}
       >
-        <Image
-          boxSize="150px"
-          objectFit="cover"
+        <img
           src={image}
           alt={description}
-          loading="eager"
+          style={{ objectFit: "cover", height: "250px", width: "auto" }}
+          loading="lazy"
         />
 
-        <Box p="6">
-          <Box display="flex" alignItems="baseline">
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              ml="2"
-            >
-              {name}
-            </Box>
-          </Box>
-          <Box
-            mt="1"
-            fontWeight="semibold"
-            as="h4"
-            maxW="150px"
-            lineHeight="tight"
-            noOfLines={1}
-          >
+        <div
+          style={{
+            margin: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p style={{ textDecoration: "underline 3px" }} role="paragraph" >
+            {name.toUpperCase()}
+          </p>
+          <div style={{ maxWidth: "150px", padding: "0.5rem" }} data-testid="description">
             {description}
-          </Box>
+          </div>
 
-          {discount ? (
-            <>
-              <Discount price={price} discount={discount} />
-            </>
-          ) : (
-            <Box>
-              {price}
-              <Box as="span" color="gray.600" fontSize="sm">
-                / $
-              </Box>
-            </Box>
-          )}
+          <div>
+            {discount ? (
+              <>
+                <Discount price={price} discount={discount} />
+              </>
+            ) : (
+              <div>
+                {" "}
+                <strong> {price}/$</strong>
+              </div>
+            )}
+          </div>
 
           {component !== "cart" && (
             <HomeAddToCartBtn
@@ -88,8 +79,8 @@ const Product: React.FC<IProduct> = ({
               discount={discount}
             />
           )}
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

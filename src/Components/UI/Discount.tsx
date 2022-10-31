@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Flex } from "@chakra-ui/react";
 
 interface DiscountProps {
   price: number;
@@ -19,15 +18,11 @@ const Discount: React.FC<DiscountProps> = ({
   };
   return (
     <>
-      <Flex gap=".5rem">
+      <div style={{ display: "flex", gap: ".5rem" }}>
         Antes:
-        <Box textDecoration="line-through">
-          {price}
-          <Box as="span" color="gray.600" fontSize="sm">
-            / $
-          </Box>
-        </Box>
-      </Flex>
+        <div style={{ textDecoration: "line-through" }}>{price} / $</div>
+      </div>
+
       <div
         style={{
           backgroundColor: "red",
@@ -37,12 +32,8 @@ const Discount: React.FC<DiscountProps> = ({
       >
         En Oferta
       </div>
-      <Box>
-        Ahora: {calculatePriceAfterDiscount(price, discount)}
-        <Box as="span" color="gray.600" fontSize="sm">
-          / $
-        </Box>
-      </Box>
+
+      <div>Ahora: {calculatePriceAfterDiscount(price, discount)} /$</div>
     </>
   );
 };
