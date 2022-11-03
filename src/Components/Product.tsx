@@ -57,9 +57,10 @@ const Product: React.FC<IProduct> = ({
 
           <div>
             {discount ? (
-              <>
+              <div data-testid="discount">
+             
                 <Discount price={price} discount={discount} />
-              </>
+              </div>
             ) : (
               <div>
                 {" "}
