@@ -1,12 +1,12 @@
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Product from "./Product";
 import { ItemsContext } from "../Components/context/ItemsAddedContext";
 
 const providerProps = {
   setAddedItem: jest.fn(),
   setNumberItems: jest.fn(),
-  addItem: jest.fn(),
+  addItem: [], // in ItemsContext interface addItem is an array, here to as well
 };
 
 const wrapper = ({ children }: any) => (
@@ -48,8 +48,7 @@ test("renders component with no crush", () => {
   const title = screen.getByRole("paragraph");
   expect(title).toBeInTheDocument();
   expect(title).toHaveTextContent(/drink/i);
-  const description = screen.getByTestId(/description/i)
+  const description = screen.getByTestId(/description/i);
   expect(description).toBeInTheDocument();
   expect(description).toHaveTextContent(/a deliciuos drink/i);
-
 });
