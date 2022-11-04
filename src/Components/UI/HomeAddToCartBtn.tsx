@@ -70,7 +70,6 @@ const HomeAddToCartBtn = ({
       {show && (
         <ToastContainer
           style={{
-            border: "solid red",
             top: "10rem",
             backgroundColor: "#4CAF50",
             color: "#fff",
