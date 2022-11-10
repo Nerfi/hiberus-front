@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Product from "../Product";
 import { Items } from "../Interfaces/ContextType";
 import axiosConfig from "../../utils/axiosInstance";
-import { useToast } from "@chakra-ui/react";
 import useFetch from "../../hooks/useFetch";
 import useFilterByUserQuery from "../../hooks/useFilterByQuery";
 import { useTranslation } from "react-i18next";
@@ -15,8 +14,7 @@ const Products: React.FC = () => {
   const desc = process.env.REACT_APP_DESC_ORDER_URL;
   const url = process.env.REACT_APP_MAIN_URL;
   let sorting = sortByPrice ? asc : desc;
-  //cambiar toas too
-  const toast = useToast();
+
   const METHOD = "GET";
   let data = useFetch(url);
   const filterData = useFilterByUserQuery(userQuery);
@@ -36,11 +34,9 @@ const Products: React.FC = () => {
 
       setProducts(sortedResults.data);
     } catch (error) {
-      toast({
-        title: `${error}`,
-        status: "error",
-        isClosable: true,
-      });
+      //añadir estado despues, ahora lo dejamos asi solo para testing 
+      console.warn(error)
+     
     }
   };
 
