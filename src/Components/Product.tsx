@@ -29,6 +29,7 @@ const Product: React.FC<IProduct> = ({
         style={{
           maxWidth: "280px",
           border: "4px solid #000",
+          marginBottom: "13px"
         }}
       >
         <img

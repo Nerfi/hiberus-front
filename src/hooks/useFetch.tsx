@@ -1,17 +1,17 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import axiosConfig from "../utils/axiosInstance";
 import { Items } from "../Components/Interfaces/ContextType";
-import { useToast } from "@chakra-ui/react";
+//import { useToast } from "@chakra-ui/react";
 import { AxiosResponse } from "axios";
-//in replace of useToas and toas 
+//in replace of useToas and toas
 //leave it for tlater on
-import ToastContainer from "react-bootstrap/ToastContainer";
+//import ToastContainer from "react-bootstrap/ToastContainer";
 
 const useFetch = (url: string | undefined) => {
   const [data, setData] = useState<Items[]>([]);
-  const [error,setError] = useState<ErrorType | null >(undefined);
+  const [error, setError] = useState(undefined);
   //need to change useToast
-  const toast = useToast();
+  //const toast = useToast();
 
   useEffect(() => {
     const products = async (): Promise<void> => {
@@ -21,21 +21,18 @@ const useFetch = (url: string | undefined) => {
           url
         );
 
-        setData(retrieveProdcuts.data);
+        setData(retrieveProdcuts && retrieveProdcuts.data);
       } catch (error) {
         //needs to be changed
-        toast({
-          title: `${error}`,
-          status: "error",
-          isClosable: true,
-        });
+        //setError(error);
+        console.log(error);
       }
     };
 
     products();
   }, []);
 
-  return data;
+  return data && data;
 };
 
 export default useFetch;

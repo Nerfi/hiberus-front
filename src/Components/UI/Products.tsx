@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Product from "../Product";
-import { Flex, Center, Input, Box } from "@chakra-ui/react";
 import { Items } from "../Interfaces/ContextType";
 import axiosConfig from "../../utils/axiosInstance";
 import { useToast } from "@chakra-ui/react";
@@ -16,6 +15,7 @@ const Products: React.FC = () => {
   const desc = process.env.REACT_APP_DESC_ORDER_URL;
   const url = process.env.REACT_APP_MAIN_URL;
   let sorting = sortByPrice ? asc : desc;
+  //cambiar toas too
   const toast = useToast();
   const METHOD = "GET";
   let data = useFetch(url);
@@ -46,16 +46,21 @@ const Products: React.FC = () => {
 
   return (
     <>
-      <Center mt="2rem" m="2rem">
-        <Input
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Sear by name "
           value={userQuery}
           onChange={handleChange}
-          placeholder="Search by name"
-          size="lg"
-          htmlSize={40}
-          border="solid #000000"
+          style={{ border: "solid #000000" }}
         />
-        <Box border="solid #000000" p="1px" display="flex" gap="1rem">
+
+        <div style={{ border: "solid #000000" }}>
           <input
             type="checkbox"
             name="sort"
@@ -63,11 +68,20 @@ const Products: React.FC = () => {
             onClick={handleSortByPrice}
           />
           <label>{t("sort", { ns: "translations" })}</label>
-        </Box>
-      </Center>
+        </div>
+      </div>
 
       {sortByPrice ? (
-        <Flex justify="center" m="6em" gap="10%" wrap="wrap" h="60vh">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            margin: "6em",
+            gap: "10%",
+            padding: "50px",
+          }}
+        >
           {sortedProducts.map((product) => (
             <Product
               component="products"
@@ -80,15 +94,17 @@ const Products: React.FC = () => {
               discount={Number(product.discount)}
             />
           ))}
-        </Flex>
+        </div>
       ) : (
-        <Flex
-          justify="center"
-          m="6em"
-          gap="10%"
-          wrap="wrap"
-          h="60vh"
-          display={sortByPrice ? "none" : "center"}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            margin: "6em",
+            gap: "10%",
+            padding: "50px",
+          }}
         >
           {filterData
             ? filterData.map((product) => (
@@ -115,7 +131,7 @@ const Products: React.FC = () => {
                   discount={Number(product.discount)}
                 />
               ))}
-        </Flex>
+        </div>
       )}
     </>
   );
